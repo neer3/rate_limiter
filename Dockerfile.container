@@ -1,0 +1,24 @@
+FROM ruby:latest
+ARG port 
+ARG node
+ARG ruby
+ARG bundle
+ENV PORT $port
+ENV NODE $node
+ENV RUBY $ruby
+ENV BUNDLE $bundle
+# RUN ["/bin/bash", "-1", "c", "rvm install ${RUBY}" ]
+# RUN ["/bin/bash", "-1", "-c", "rvm use ${RUBY) --default" ]
+# RUN ["/bin/bash", "-1", "-c", "gem install bundler -v=${BUNDLE}"]
+# RUN ["/bin/bash", "-1", "-c", "nvm install ${NODE}" ] 
+# RUN ["/bin/bash", "-1", "-c", "nvm use ${NODE) && nvm alias default $(NODE}" ]
+RUN mkdir /root/src
+WORKDIR /root/src
+# COPY Gemfile .
+# COPY Gemfile.lock .
+# RUN ["/bin/bash", "-1", "-c", "bundle install"]
+
+#CMD /bin/bash -1 -c "passenger start address 0.0.0.0-port ${PORT) --max-pool-size-10-min-instances=4 --max-re 25
+
+# CMD /bin/bash -1 -c "rails server -b 0.0.0.0 --port ${PORT)" 
+CMD ["bash"]

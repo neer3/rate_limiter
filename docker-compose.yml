@@ -1,0 +1,33 @@
+version: "3.0"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    working_dir: /projects/mysql
+    volumes:
+      - /home/neer/Desktop/projects/mysqll:/projects/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    tty: true
+  rate_limit:
+    build:
+      context: /home/neer/Desktop/projects/sys_de/rate_limiter
+      dockerfile: Dockerfile.container
+      args:
+        port: 4500
+        node: 16.17.0
+        ruby: 3.1.2
+        bundle: 2.3.3
+    image: rate_limit
+    container_name: rate_limit
+    working_dir: /root/src
+    volumes:
+      - /home/neer/Desktop/projects/sys_de/rate_limiter:/root/src
+    depends_on:
+      - "mysql"
+    ports:
+      - "4500:4500"
+    tty: true
